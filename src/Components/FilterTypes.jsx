@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react';
 
 class FilterTypes extends Component {
   state = {
-    // selectedType: []
+    selectedTypes: [],
     activeTextButton: false,
     activeDateButton: false,
     activeVINButton: false,
@@ -13,7 +13,32 @@ class FilterTypes extends Component {
     activeSelectButton: false
   }
 
-  handleTextClick = () => this.setState({ activeTextButton: !this.state.activeTextButton });
+  handleTextClick = () => {
+    this.setState({ activeTextButton: !this.state.activeTextButton });
+
+    if(!this.state.activeTextButton){
+      let textTypeObj = {
+        className: "type text",
+        label: "Text",
+        definition: "String of text",
+        defaultDisplay: "Free-form text input"
+      };
+      this.state.selectedTypes.push(textTypeObj);
+      console.log('PUSHED');
+    }
+
+    if(this.state.activeTextButton){
+      console.log('CHANGING TRUE TO FALSE');
+      for(let i = 0; i < this.state.selectedTypes.length; i++){
+        console.log(this.state.selectedTypes[i]);
+        if(this.state.selectedTypes[i].label === "Text"){
+          console.log('FOUND TEXT OBJ');
+          this.state.selectedTypes.splice(i, 1);
+          console.log('ARRAY AFTER SPLICE', this.state.selectedTypes);
+        }
+      }
+    }
+  };
 
   handleDateClick = () => this.setState({ activeDateButton: !this.state.activeDateButton });
 
