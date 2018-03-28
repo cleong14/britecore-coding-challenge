@@ -1,3 +1,15 @@
 .App {
   margin: 25px;
 }
+
+.type {
+  text-align: left;
+}
+
+.type .button {
+  background: blue;
+}
+
+.type .text {
+  /* background-color: blue; */
+}
