@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import FilterTypes from './FilterTypes';
+import FilterTypes from './FieldTypes/FilterTypes';
+import FieldDetails from './FieldDetails/FieldDetails';
 
 class CommercialContainer extends Component {
   render() {
@@ -10,12 +11,14 @@ class CommercialContainer extends Component {
         <div className="commercialContainer-content">
           <div className="row">
             <div className="col-md-3 fieldTypes">
-              <h4 className="fieldTypes-header">Field Types</h4>
+              <h3 className="fieldTypes-header">Field Types</h3>
 
               <FilterTypes />
             </div>
-            <div className="col-md-6 fieldDetails">
+            <div className="col-md-9 fieldDetails">
+              <h3 className="fieldDetails-header">Field Details</h3>
 
+              <FieldDetails />
             </div>
           </div>
         </div>
