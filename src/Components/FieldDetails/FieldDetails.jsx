@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 
 class FieldDetails extends Component {
   state = {
     displayLabel: [],
     referenceName: [],
     defaultValue: [],
-    customValidation: []
+    customValidation: [],
+    tagGroup: []
   }
 
   handleLabelBlur = (e) => {
@@ -96,6 +97,23 @@ class FieldDetails extends Component {
             </div>
           </div>
         </Form>
+        <div className="row">
+          <div className="col-md-3 fieldDetails-left">
+            <h4>Tags</h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-3 fieldDetails-left">
+            <Form>
+              <Form.Field>
+                <label className="tagGroup-header">Tag Group</label>
+              </Form.Field>
+            </Form>
+            <ul className="tagGroupList">
+
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

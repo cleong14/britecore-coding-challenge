@@ -2,6 +2,10 @@
   margin: 25px;
 }
 
+.fieldDetails {
+  padding-left: 15px;
+}
+
 .fieldDetails-left {
   padding-left: 0;
 }
