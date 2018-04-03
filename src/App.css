@@ -10,6 +10,14 @@
   padding-left: 0;
 }
 
+.fieldTypes-column1 {
+  margin-left: 40px;
+}
+
+.modal-header {
+  padding-left: 15px;
+}
+
 .type {
   text-align: left;
 }

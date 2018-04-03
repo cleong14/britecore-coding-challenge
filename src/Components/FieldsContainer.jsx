@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class CommercialContainer extends Component {
+class FieldsContainer extends Component {
   render() {
     return (
-      <div className="CommercialContainer">
+      <div className="FieldsContainer">
         {this.props.children}
       </div>
     );
   }
 }
 
-export default CommercialContainer;
+export default FieldsContainer;
