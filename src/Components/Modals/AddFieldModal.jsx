@@ -5,8 +5,7 @@ import Types from '../FieldTypes/Types';
 class AddFieldModal extends Component {
   state = {
     modalOpen: false,
-    typeArray: this.props.types ? this.props.types : [],
-    renderArray: [],
+    typeArray: [],
     currentSearch: '',
     foundType: false
   }
@@ -14,7 +13,7 @@ class AddFieldModal extends Component {
   componentDidMount(props){
     console.log('MOUNTED PROPS', this.props);
     this.props.types.map((mountedType) => {
-      this.state.renderArray.push(mountedType);
+      this.state.typeArray.push(mountedType);
     });
   }
 
@@ -34,12 +33,7 @@ class AddFieldModal extends Component {
     console.log(e.target.value);
     this.setState({currentSearch: e.target.value});
 
-    if(e.target.value){
-      console.log('EVENT NOW');
-    }
-
-    this.state.renderArray.map((type) => {
-      let initialRenderArray = this.state.renderArray;
+    this.state.typeArray.map((type) => {
       console.log('TYPE IN SEARCH', type);
       if(e.target.value === type.className){
         let newRenderArray = [];
@@ -50,27 +44,18 @@ class AddFieldModal extends Component {
 
         this.setState({
           foundType: true,
-          renderArray: newRenderArray
+          typeArray: newRenderArray
         });
-        console.log('STATE AT END OF FOUND', this.state);
       }
-      console.log('STATE OUTSIDE OF FOUND CONDITIONAL', this.state);
       if(e.target.value !== type.className){
         if(this.state.foundType){
-          console.log('NOW NOT SAME');
+          console.log('NOT SAME');
           this.setState({
             foundType: false,
-            renderArray: this.props.types
+            typeArray: this.props.types
           });
         }
-        if(!this.state.foundType){
-          // this.state.renderArray.push(type);
-        }
       }
-    });
-
-    this.state.renderArray.map((renderType) => {
-      console.log('TYPE IN RENDER ARR', renderType);
     });
   }
 
@@ -98,7 +83,7 @@ class AddFieldModal extends Component {
                     <Input placeholder='Search types...' onKeyUp={this.handleSearch} />
                   </div>
 
-                  {this.state.renderArray.map((type, i) => {
+                  {this.state.typeArray.map((type, i) => {
                     console.log('TYPE IN RENDER ARRAY', type);
                     return (
                       <div key={i} className='types'>
