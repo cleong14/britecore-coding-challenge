@@ -3,19 +3,23 @@ import { Grid, Button, Header, Modal, Input, Label } from 'semantic-ui-react';
 import Types from '../FieldTypes/Types';
 
 class AddFieldModal extends Component {
-  state = {
-    modalOpen: false,
-    typeArray: [],
-    currentSearch: '',
-    foundType: false
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalOpen: false,
+      typeArray: this.props.types,
+      currentSearch: '',
+      foundType: false
+    }
   }
 
-  componentDidMount(props){
-    console.log('MOUNTED PROPS', this.props);
-    this.props.types.map((mountedType) => {
-      this.state.typeArray.push(mountedType);
-    });
-  }
+  // componentDidMount(props){
+  //   console.log('MOUNTED PROPS', this.props);
+  //   this.props.types.map((mountedType) => {
+  //     this.state.typeArray.push(mountedType);
+  //   });
+  // }
 
   handleOpen = () => {
     this.setState({modalOpen: true});
@@ -33,7 +37,10 @@ class AddFieldModal extends Component {
     console.log(e.target.value);
     this.setState({currentSearch: e.target.value});
 
-    this.state.typeArray.map((type) => {
+    console.log('MODAL SEARCH PROPS', this.props);
+    console.log('MODAL SEARCH STATE', this.state);
+
+    this.props.types.map((type) => {
       console.log('TYPE IN SEARCH', type);
       if(e.target.value === type.className){
         let newRenderArray = [];
@@ -47,6 +54,7 @@ class AddFieldModal extends Component {
           typeArray: newRenderArray
         });
       }
+
       if(e.target.value !== type.className){
         if(this.state.foundType){
           console.log('NOT SAME');
@@ -80,14 +88,15 @@ class AddFieldModal extends Component {
 
                   <div className='filterTypes'>
                     <h5>Filter Types</h5><br/>
-                    <Input placeholder='Search types...' onKeyUp={this.handleSearch} />
+                    <Input placeholder='Search a type' onKeyUp={this.handleSearch} />
                   </div>
 
                   {this.state.typeArray.map((type, i) => {
                     console.log('TYPE IN RENDER ARRAY', type);
+                    console.log('ACTIVE CLASS', type.buttonClassName);
                     return (
                       <div key={i} className='types'>
-                        <Button className={type.buttonClassName} toggle active={type.buttonActive} onClick={type.buttonOnClick}>
+                        <Button className={type.buttonClassName} toggle onClick={type.buttonOnClick}>
                           <Types
                             className={type.className}
                             label={type.label}
