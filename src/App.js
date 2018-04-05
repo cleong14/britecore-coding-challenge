@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       types: [
         {
-          buttonClassName: 'textButton' + ' active',
+          buttonClassName: 'textButton',
           buttonOnClick: this.handleTextClick,
           className: 'text',
           label: 'Text',
@@ -27,36 +27,37 @@ class App extends Component {
           definition: 'Standard ISO format date',
           defaultDisplay: 'Datepicker, with configurable format'
         },
+        {
+          buttonClassName: 'vinButton',
+          buttonOnClick: this.handleVinClick,
+          className: 'vin',
+          label: 'VIN',
+          definition: 'Vehicle Identification Number',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'numberButton',
+          buttonOnClick: this.handleNumberClick,
+          className: 'number',
+          label: 'Number',
+          definition: 'Integar',
+          defaultDisplay: 'Free-form integar input'
+        }
       ],
-      // activeTypeArray: [
-      //   {
-      //     className: 'text',
-      //     activeButton: ' active'
-      //   },
-      //   {
-      //     className: 'date',
-      //     activeButton: ''
-      //   }
-      // ],
-      buttonActive: true
+      buttonActive: false
     }
   }
 
-  // 1. CHECK IF ANY OTHER TYPE IS SELECTED
-  // 2. RESET TO FALSE IF IT IS
-  // 3. CHANGE CORRECT TYPE TO ACTIVE
-  // 4. REPEAT
-
   handleTextClick = (e, data) => {
-    console.log('ON CLICK TEXT', data);
-    console.log('NAME', data.children.props);
+    console.log('ON CLICK TEXT DATA', data);
+    console.log('TEXT CHILDREN PROPS', data.children.props);
 
     if(this.state.buttonActive){ // if any button is active
       for(let i = 0; i < this.state.types.length; i++){
         console.log('EACH ITEM IN ARRAY', this.state.types[i]);
 
         if(this.state.types[i].buttonClassName.includes(' active')){ // finding which specific button is active
-          console.log('THIS IS THE ACTIVE ITEM', this.state.types[i]);
+          console.log('TEXT IS THE ACTIVE ITEM', this.state.types[i]);
           let resetActiveTypesArray = [
             {
               buttonClassName: 'textButton',
@@ -73,16 +74,34 @@ class App extends Component {
               label: 'Date',
               definition: 'Standard ISO format date',
               defaultDisplay: 'Datepicker, with configurable format'
+            },
+            {
+              buttonClassName: 'vinButton',
+              buttonOnClick: this.handleVinClick,
+              className: 'vin',
+              label: 'VIN',
+              definition: 'Vehicle Identification Number',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'numberButton',
+              buttonOnClick: this.handleNumberClick,
+              className: 'number',
+              label: 'Number',
+              definition: 'Integar',
+              defaultDisplay: 'Free-form integar input'
             }
           ];
 
-          this.setState({types: resetActiveTypesArray});
-          this.setState({buttonActive: false});
+          this.setState({
+            types: resetActiveTypesArray,
+            buttonActive: false
+          });
         }
       }
     }
     if(!this.state.buttonActive){
-      let activateTextButtonArray = [
+      let activateButtonArray = [
         {
           buttonClassName: 'textButton' + ' active',
           buttonOnClick: this.handleTextClick,
@@ -98,57 +117,326 @@ class App extends Component {
           label: 'Date',
           definition: 'Standard ISO format date',
           defaultDisplay: 'Datepicker, with configurable format'
+        },
+        {
+          buttonClassName: 'vinButton',
+          buttonOnClick: this.handleVinClick,
+          className: 'vin',
+          label: 'VIN',
+          definition: 'Vehicle Identification Number',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'numberButton',
+          buttonOnClick: this.handleNumberClick,
+          className: 'number',
+          label: 'Number',
+          definition: 'Integar',
+          defaultDisplay: 'Free-form integar input'
         }
       ];
 
-      this.setState({types: activateTextButtonArray});
-      this.setState({buttonActive: true});
-
-      console.log('STATE AFTER TEXT ACTIVATION', this.state);
+      this.setState({
+        types: activateButtonArray,
+        buttonActive: true
+      });
     }
   }
 
   handleDateClick = (e, data) => {
-    console.log('ON CLICK DATE', data);
-    // this.setState({activeDateButton: !this.state.activeDateButton});
+    console.log('ON CLICK DATE DATA', data);
+    console.log('DATE CHILDREN PROPS', data.children.props);
+
+    if(this.state.buttonActive){ // if any button is active
+      for(let i = 0; i < this.state.types.length; i++){
+        console.log('EACH ITEM IN ARRAY', this.state.types[i]);
+
+        if(this.state.types[i].buttonClassName.includes(' active')){ // finding which specific button is active
+          console.log('DATE IS THE ACTIVE ITEM', this.state.types[i]);
+          let resetActiveTypesArray = [
+            {
+              buttonClassName: 'textButton',
+              buttonOnClick: this.handleTextClick,
+              className: 'text',
+              label: 'Text',
+              definition: 'String of text',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'dateButton',
+              buttonOnClick: this.handleDateClick,
+              className: 'date',
+              label: 'Date',
+              definition: 'Standard ISO format date',
+              defaultDisplay: 'Datepicker, with configurable format'
+            },
+            {
+              buttonClassName: 'vinButton',
+              buttonOnClick: this.handleVinClick,
+              className: 'vin',
+              label: 'VIN',
+              definition: 'Vehicle Identification Number',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'numberButton',
+              buttonOnClick: this.handleNumberClick,
+              className: 'number',
+              label: 'Number',
+              definition: 'Integar',
+              defaultDisplay: 'Free-form integar input'
+            }
+          ];
+
+          this.setState({
+            types: resetActiveTypesArray,
+            buttonActive: false
+          });
+        }
+      }
+    }
+    if(!this.state.buttonActive){
+      let activateButtonArray = [
+        {
+          buttonClassName: 'textButton',
+          buttonOnClick: this.handleTextClick,
+          className: 'text',
+          label: 'Text',
+          definition: 'String of text',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'dateButton' + ' active',
+          buttonOnClick: this.handleDateClick,
+          className: 'date',
+          label: 'Date',
+          definition: 'Standard ISO format date',
+          defaultDisplay: 'Datepicker, with configurable format'
+        },
+        {
+          buttonClassName: 'vinButton',
+          buttonOnClick: this.handleVinClick,
+          className: 'vin',
+          label: 'VIN',
+          definition: 'Vehicle Identification Number',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'numberButton',
+          buttonOnClick: this.handleNumberClick,
+          className: 'number',
+          label: 'Number',
+          definition: 'Integar',
+          defaultDisplay: 'Free-form integar input'
+        }
+      ];
+
+      this.setState({
+        types: activateButtonArray,
+        buttonActive: true
+      });
+    }
   }
 
-  // handleClick = (e, data) => {
-  //   console.log('HANDLE CLICK DATA'. data);
-  // }
+  handleVinClick = (e, data) => {
+    console.log('ON CLICK VIN DATA', data);
+    console.log('VIN CHILDREN PROPS', data.children.props);
+
+    if(this.state.buttonActive){ // if any button is active
+      for(let i = 0; i < this.state.types.length; i++){
+        console.log('EACH ITEM IN ARRAY', this.state.types[i]);
+
+        if(this.state.types[i].buttonClassName.includes(' active')){ // finding which specific button is active
+          console.log('VIN IS THE ACTIVE ITEM', this.state.types[i]);
+          let resetActiveTypesArray = [
+            {
+              buttonClassName: 'textButton',
+              buttonOnClick: this.handleTextClick,
+              className: 'text',
+              label: 'Text',
+              definition: 'String of text',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'dateButton',
+              buttonOnClick: this.handleDateClick,
+              className: 'date',
+              label: 'Date',
+              definition: 'Standard ISO format date',
+              defaultDisplay: 'Datepicker, with configurable format'
+            },
+            {
+              buttonClassName: 'vinButton',
+              buttonOnClick: this.handleVinClick,
+              className: 'vin',
+              label: 'VIN',
+              definition: 'Vehicle Identification Number',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'numberButton',
+              buttonOnClick: this.handleNumberClick,
+              className: 'number',
+              label: 'Number',
+              definition: 'Integar',
+              defaultDisplay: 'Free-form integar input'
+            }
+          ];
+
+          this.setState({
+            types: resetActiveTypesArray,
+            buttonActive: false
+          });
+        }
+      }
+    }
+    if(!this.state.buttonActive){
+      let activateButtonArray = [
+        {
+          buttonClassName: 'textButton',
+          buttonOnClick: this.handleTextClick,
+          className: 'text',
+          label: 'Text',
+          definition: 'String of text',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'dateButton',
+          buttonOnClick: this.handleDateClick,
+          className: 'date',
+          label: 'Date',
+          definition: 'Standard ISO format date',
+          defaultDisplay: 'Datepicker, with configurable format'
+        },
+        {
+          buttonClassName: 'vinButton' + ' active',
+          buttonOnClick: this.handleVinClick,
+          className: 'vin',
+          label: 'VIN',
+          definition: 'Vehicle Identification Number',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'numberButton',
+          buttonOnClick: this.handleNumberClick,
+          className: 'number',
+          label: 'Number',
+          definition: 'Integar',
+          defaultDisplay: 'Free-form integar input'
+        }
+      ];
+
+      this.setState({
+        types: activateButtonArray,
+        buttonActive: true
+      });
+    }
+  }
+
+  handleNumberClick = (e, data) => {
+    console.log('ON CLICK NUMBER DATA', data);
+    console.log('NUMBER CHILDREN PROPS', data.children.props);
+
+    if(this.state.buttonActive){ // if any button is active
+      for(let i = 0; i < this.state.types.length; i++){
+        console.log('EACH ITEM IN ARRAY', this.state.types[i]);
+
+        if(this.state.types[i].buttonClassName.includes(' active')){ // finding which specific button is active
+          console.log('NUMBER IS THE ACTIVE ITEM', this.state.types[i]);
+          let resetActiveTypesArray = [
+            {
+              buttonClassName: 'textButton',
+              buttonOnClick: this.handleTextClick,
+              className: 'text',
+              label: 'Text',
+              definition: 'String of text',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'dateButton',
+              buttonOnClick: this.handleDateClick,
+              className: 'date',
+              label: 'Date',
+              definition: 'Standard ISO format date',
+              defaultDisplay: 'Datepicker, with configurable format'
+            },
+            {
+              buttonClassName: 'vinButton',
+              buttonOnClick: this.handleVinClick,
+              className: 'vin',
+              label: 'VIN',
+              definition: 'Vehicle Identification Number',
+              defaultDisplay: 'Free-form text input'
+            },
+            {
+              buttonClassName: 'numberButton',
+              buttonOnClick: this.handleNumberClick,
+              className: 'number',
+              label: 'Number',
+              definition: 'Integar',
+              defaultDisplay: 'Free-form integar input'
+            }
+          ];
+
+          this.setState({
+            types: resetActiveTypesArray,
+            buttonActive: false
+          });
+        }
+      }
+    }
+    if(!this.state.buttonActive){
+      let activateButtonArray = [
+        {
+          buttonClassName: 'textButton',
+          buttonOnClick: this.handleTextClick,
+          className: 'text',
+          label: 'Text',
+          definition: 'String of text',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'dateButton',
+          buttonOnClick: this.handleDateClick,
+          className: 'date',
+          label: 'Date',
+          definition: 'Standard ISO format date',
+          defaultDisplay: 'Datepicker, with configurable format'
+        },
+        {
+          buttonClassName: 'vinButton',
+          buttonOnClick: this.handleVinClick,
+          className: 'vin',
+          label: 'VIN',
+          definition: 'Vehicle Identification Number',
+          defaultDisplay: 'Free-form text input'
+        },
+        {
+          buttonClassName: 'numberButton' + ' active',
+          buttonOnClick: this.handleNumberClick,
+          className: 'number',
+          label: 'Number',
+          definition: 'Integar',
+          defaultDisplay: 'Free-form integar input'
+        }
+      ];
+
+      this.setState({
+        types: activateButtonArray,
+        buttonActive: true
+      });
+    }
+  }
 
   render() {
     console.log('APP STATE', this.state);
     // let types = [
       // {
-      //   buttonClassName: 'textButton' + this.state.activeTypeArray[0].activeButton,
-      //   buttonOnClick: this.handleTextClick,
-      //   className: 'text',
-      //   label: 'Text',
-      //   definition: 'String of text',
-      //   defaultDisplay: 'Free-form text input'
-      // },
-      // {
-      //   buttonClassName: 'dateButton',
-      //   buttonOnClick: this.handleDateClick,
-      //   className: 'date',
-      //   label: 'Date',
-      //   definition: 'Standard ISO format date',
-      //   defaultDisplay: 'Datepicker, with configurable format'
-      // },
-      // {
-      //   buttonClassName: 'vinButton',
-      //   className: 'vin',
-      //   label: 'VIN',
-      //   definition: 'Vehicle Identification Number',
-      //   defaultDisplay: 'Free-form text input'
-      // },
-      // {
-      //   buttonClassName: 'numberButton',
-      //   className: 'number',
-      //   label: 'Number',
-      //   definition: 'Integar',
-      //   defaultDisplay: 'Free-form integar input'
+        // buttonClassName: 'numberButton',
+        // className: 'number',
+        // label: 'Number',
+        // definition: 'Integar',
+        // defaultDisplay: 'Free-form integar input'
       // },
       // {
       //   buttonClassName: 'currencyButton',

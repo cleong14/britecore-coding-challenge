@@ -39,7 +39,7 @@ class AddFieldModal extends Component {
     console.log('MODAL SEARCH PROPS', this.props);
     console.log('MODAL SEARCH STATE', this.state);
 
-    this.props.types.map((type) => {
+    this.state.typeArray.map((type) => {
       console.log('TYPE IN SEARCH', type);
       if(e.target.value === type.className){
         let newRenderArray = [];
