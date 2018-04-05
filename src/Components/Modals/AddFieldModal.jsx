@@ -33,18 +33,13 @@ class AddFieldModal extends Component {
   // }
 
   handleSearch = (e) => {
-    console.log(e.target.value);
     this.setState({currentSearch: e.target.value});
 
-    console.log('MODAL SEARCH PROPS', this.props);
-    console.log('MODAL SEARCH STATE', this.state);
-
     this.state.typeArray.map((type) => {
-      console.log('TYPE IN SEARCH', type);
       if(e.target.value === type.className){
+        console.log('MATCH');
         let newRenderArray = [];
 
-        console.log('MATCH');
         newRenderArray.push(type);
         console.log('NEW ARR', newRenderArray)
 
@@ -56,7 +51,6 @@ class AddFieldModal extends Component {
 
       if(e.target.value !== type.className){
         if(this.state.foundType){
-          console.log('NOT SAME');
           this.setState({
             foundType: false,
             typeArray: this.props.types
@@ -91,8 +85,6 @@ class AddFieldModal extends Component {
                   </div>
 
                   {this.state.typeArray.map((type, i) => {
-                    console.log('TYPE IN RENDER ARRAY', type);
-                    console.log('ACTIVE CLASS', type.buttonClassName);
                     return (
                       <div key={i} className='types'>
                         <Button className={type.buttonClassName} toggle onClick={type.buttonOnClick}>
