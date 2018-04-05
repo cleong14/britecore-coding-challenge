@@ -173,7 +173,7 @@ class App extends Component {
         <CommercialContainer>
           <h1 className="commercialHeader">Commercial Property</h1>
 
-          <AddFieldModal types={this.state.types} appState={this.state} />
+          <AddFieldModal types={this.state.types} appState={this.state} handleTextClick={this.handleTextClick} />
 
           {/* <h3>Preview Fields Below</h3>
           <FieldsContainer>

@@ -14,12 +14,11 @@ class AddFieldModal extends Component {
     }
   }
 
-  // componentDidMount(props){
-  //   console.log('MOUNTED PROPS', this.props);
-  //   this.props.types.map((mountedType) => {
-  //     this.state.typeArray.push(mountedType);
-  //   });
-  // }
+  componentWillReceiveProps(nextProps){
+    if(this.props.types !== nextProps.types){
+      this.setState({typeArray: nextProps.types});
+    }
+  }
 
   handleOpen = () => {
     this.setState({modalOpen: true});
