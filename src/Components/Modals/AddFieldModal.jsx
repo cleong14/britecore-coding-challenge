@@ -66,52 +66,23 @@ class AddFieldModal extends Component {
     console.log('MODAL STATE', this.state);
 
     return (
-      <div className="AddFieldModal">
-        <Modal
-          trigger={<Button onClick={this.handleOpen}>Add Field</Button>}
-          open={this.state.modalOpen}
-          onClose={this.handleClose}
-          size='fullscreen'
-        >
-          <Header className='modal-header' content='Commercial Property - Add Field' />
-          <Modal.Content>
-            <Grid relaxed columns={4}>
-
-              <Grid.Row column={2}>
-                <Grid.Column>
+      <div className="AddFieldModal modal-body">
+        <div className="container-fluid">
+          <Modal
+            trigger={<Button onClick={this.handleOpen}>Add Field</Button>}
+            open={this.state.modalOpen}
+            onClose={this.handleClose}
+            size='fullscreen'
+          >
+            <Modal.Header>Commercial Property - Add Field</Modal.Header>
+            <Modal.Content scrolling>
+              <div className="row">
+                <div className="col-md-3">
                   <h3>Field Types</h3>
-                </Grid.Column>
 
-                <Grid.Column>
-                  <h3>Field Details</h3>
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row column={4}>
-                <Grid.Column>
                   <h5>Filter Types</h5>
                   <Input placeholder='Search types' onKeyUp={this.handleSearch} />
-                </Grid.Column>
 
-                <Grid.Column>
-                  <h5>Display Label</h5>
-                  <Input placeholder='Label your input' onBlur={this.handleDisplayLabelBlur} />
-                  <h6>For display purposes, spaces allowed.</h6>
-                </Grid.Column>
-
-                <Grid.Column>
-                  <h5>Reference Name</h5>
-                  <Input placeholder='E.g. display-label' onBlur={this.handleReferenceNameBlur} />
-                  <h6>Used to reference in calculations, no spaces allowed.</h6>
-                </Grid.Column>
-
-                <Grid.Column>
-                  {/* for Field Groups */}
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row column={3}>
-                <Grid.Column>
                   {this.state.typeArray.map((type, i) => {
                     return (
                       <div key={i} className='types'>
@@ -126,112 +97,74 @@ class AddFieldModal extends Component {
                       </div>
                     );
                   })}
-                </Grid.Column>
+                </div>
 
-                <Grid.Column>
-                  <Grid.Row column={2}>
-                    <Grid.Column>
-                      <h5>Default Value</h5>
-                      <Input placeholder='Default value for input' onBlur={this.handleDefaultValueBlur} />
-                      <h6>Initial value for input. Use "None" for no default value.</h6>
-                    </Grid.Column>
-
-                    <Grid.Column style={{display: 'none'}}>
-                      <h5>Default Value</h5>
-                      <Input placeholder='Default value for input' onBlur={this.handleDefaultValueBlur} />
-                      <h6>Initial value for input. Use "None" for no default value.</h6>
-                    </Grid.Column>
-                  </Grid.Row>
-
-                  <Grid.Row column={2}>
-                    <Grid.Column>
-                      <h5>Custom Validation</h5>
-                      <Input placeholder='Set custom validations' onBlur={this.handleCustomValidationBlur} />
-                      <h6>Any regex pattern can be used for custom input validation.</h6>
-                    </Grid.Column>
-
-                    <Grid.Column style={{display: 'none'}}>
-                      <h5>Custom Validation</h5>
-                      <Input placeholder='Set custom validations' onBlur={this.handleCustomValidationBlur} />
-                      <h6>Any regex pattern can be used for custom input validation.</h6>
-                    </Grid.Column>
-                  </Grid.Row>
-
-                  <Grid.Row column={2}>
-                    <Grid.Column>
-                      <h4>Tags</h4>
-                    </Grid.Column>
-
-                    <Grid.Column style={{display: 'none'}}>
-                      <h4>Tags</h4>
-                    </Grid.Column>
-                  </Grid.Row>
-
-                  <Grid.Row column={2}>
-                    <Grid.Column>
-                      <h5>Tag Group</h5>
-                      <Button content="TAG GROUP BUTTONS GO HERE" />
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <h5>Tags</h5>
-                      <h6>Select a tag group to see individual tags.</h6>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-
-            {/* NEED TO FIGURE OUT A WAY TO RENDER TAG GROUP AND TAGS SECTION CORRECT!!!! */}
-
-            {/* <Grid relaxed columns={4}>
-              <Grid.Column className='modalColumn1-fieldTypes'>
-
-              </Grid.Column>
-
-              <FieldDetailsContainer>
-                <Grid.Column className='modalColumn2-fieldDetails'>
+                <div className="col-md-9">
                   <h3>Field Details</h3>
 
-                  <div className='displayLabel'>
-                    <h5>Display Label</h5><br/>
-                    <Input placeholder='Label your input' onBlur={this.handleDisplayLabelBlur} />
-                    <h6>For display purposes, spaces allowed.</h6>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <h5>Display Label</h5>
+                      <Input placeholder='Label your input' onBlur={this.handleDisplayLabelBlur} />
+                      <h6>For display purposes, spaces allowed.</h6>
+                    </div>
+
+                    <div className="col-md-3">
+                      <h5>Reference Name</h5>
+                      <Input placeholder='E.g. display-label' onBlur={this.handleReferenceNameBlur} />
+                      <h6>Used to reference in calculations, no spaces allowed.</h6>
+                    </div>
+
+                    <div className="col-md-3">
+                      <h5>FIELD GROUP STUFF</h5>
+                    </div>
                   </div>
 
-                  <div className='defaultValue'>
-                    <h5>Default Value</h5><br/>
-                    <Input placeholder='Default value for input' onBlur={this.handleDefaultValueBlur} />
-                    <h6>Initial value for input. Use "None" for no default value.</h6>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <h5>Default Value</h5>
+                      <Input placeholder='Default value for input' onBlur={this.handleDefaultValueBlur} />
+                      <h6>Initial value for input. Use "None" for no default value.</h6>
+                    </div>
                   </div>
 
-                  <div className='customValidation'>
-                    <h5>Custom Validation</h5><br/>
-                    <Input placeholder='Set custom validations' onBlur={this.handleCustomValidationBlur} />
-                    <h6>Any regex pattern can be used for custom input validation.</h6>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <h5>Custom Validation</h5>
+                      <Input placeholder='Set custom validations' onBlur={this.handleCustomValidationBlur} />
+                      <h6>Any regex pattern can be used for custom input validation.</h6>
+                    </div>
                   </div>
 
-
-
-                </Grid.Column>
-
-                <Grid.Column className='modalColumn3-fieldDetails'>
-                  <div className='referenceName'>
-                    <h5>Reference Name</h5><br/>
-                    <Input placeholder='E.g. display-label' onBlur={this.handleReferenceNameBlur} />
-                    <h6>Used to reference in calculations, no spaces allowed.</h6>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <h4>Tags</h4>
+                    </div>
                   </div>
-                </Grid.Column>
 
-              </FieldDetailsContainer>
-            </Grid> */}
-          </Modal.Content>
-          <Modal.Actions>
-            <Button color='green' onClick={this.handleClose}>
-              Close
-            </Button>
-          </Modal.Actions>
-        </Modal>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <h5>Tag Group</h5>
+                      <Button content="TAGS" />
+                      <Button content="GO" />
+                      <Button content="HERE" />
+                    </div>
+
+                    <div className="col-md-3">
+                      <h5>Tags</h5>
+                      <h6>Select a tag group to see individual tags.</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button onClick={this.handleClose}>
+                Close
+              </Button>
+            </Modal.Actions>
+          </Modal>
+        </div>
       </div>
     );
   }
