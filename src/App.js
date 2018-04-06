@@ -60,7 +60,10 @@ class App extends Component {
         }
       ],
       buttonActive: false,
-      displayLabel: ''
+      displayLabel: '',
+      referenceName: '',
+      defaultValue: '',
+      customValidation: ''
     }
   }
 

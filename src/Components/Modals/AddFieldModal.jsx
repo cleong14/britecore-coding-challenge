@@ -12,7 +12,10 @@ class AddFieldModal extends Component {
       typeArray: this.props.types,
       currentSearch: '',
       foundType: false,
-      displayLabel: this.props.appState.displayLabel
+      displayLabel: this.props.appState.displayLabel,
+      referenceName: this.props.appState.referenceName,
+      defaultValue: this.props.appState.defaultValue,
+      customValidation: this.props.appState.customValidation
     }
   }
 
@@ -20,10 +23,6 @@ class AddFieldModal extends Component {
     console.log('NEXT PROPS', nextProps)
     if(this.props.types !== nextProps.types){
       this.setState({typeArray: nextProps.types});
-    }
-
-    if(this.props.appState.displayLabel !== nextProps.appState.displayLabel){
-      this.setState({displayLabel: nextProps.appState.displayLabel});
     }
   }
 
@@ -73,6 +72,30 @@ class AddFieldModal extends Component {
 
   handleDisplayLabel = (e) => {
     console.log('LABEL BLUR', e.target.value);
+  }
+
+  setReferenceName = (e) => {
+    this.setState({referenceName: e.target.value});
+  }
+
+  handleReferenceName = (e) => {
+    console.log('REFERENCE BLUR', e.target.value);
+  }
+
+  setDefaultValue = (e) => {
+    this.setState({defaultValue: e.target.value});
+  }
+
+  handleDefaultValue = (e) => {
+    console.log('DEFAULT BLUR', e.target.value);
+  }
+
+  setCustomValidation = (e) => {
+    this.setState({customValidation: e.target.value});
+  }
+
+  handleCustomValidation = (e) => {
+    console.log('CUSTOM BLUR', e.target.value);
   }
 
   render() {
@@ -130,7 +153,12 @@ class AddFieldModal extends Component {
 
                     <div className="col-md-3">
                       <h5>Reference Name</h5>
-                      <Input placeholder='E.g. display-label' onBlur={this.handleReferenceNameBlur} />
+                      <Input
+                        placeholder='E.g. display-label'
+                        onChange={this.setReferenceName}
+                        onBlur={this.handleReferenceName}
+                        value={this.state.referenceName}
+                      />
                       <h6>Used to reference in calculations, no spaces allowed.</h6>
                     </div>
 
@@ -142,7 +170,12 @@ class AddFieldModal extends Component {
                   <div className="row">
                     <div className="col-md-3">
                       <h5>Default Value</h5>
-                      <Input placeholder='Default value for input' onBlur={this.handleDefaultValueBlur} />
+                      <Input
+                        placeholder='Default value for input'
+                        onChange={this.setDefaultValue}
+                        onBlur={this.handleDefaultValue}
+                        value={this.state.defaultValue}
+                      />
                       <h6>Initial value for input. Use "None" for no default value.</h6>
                     </div>
                   </div>
@@ -150,7 +183,12 @@ class AddFieldModal extends Component {
                   <div className="row">
                     <div className="col-md-3">
                       <h5>Custom Validation</h5>
-                      <Input placeholder='Set custom validations' onBlur={this.handleCustomValidationBlur} />
+                      <Input
+                        placeholder='Set custom validations'
+                        onChange={this.setCustomValidation}
+                        onBlur={this.handleCustomValidation}
+                        value={this.state.customValidation}
+                      />
                       <h6>Any regex pattern can be used for custom input validation.</h6>
                     </div>
                   </div>
