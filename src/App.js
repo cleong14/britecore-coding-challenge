@@ -59,7 +59,8 @@ class App extends Component {
           defaultDisplay: 'Single choice from multiple preset options'
         }
       ],
-      buttonActive: false
+      buttonActive: false,
+      displayLabel: ''
     }
   }
 

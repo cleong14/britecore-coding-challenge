@@ -11,13 +11,19 @@ class AddFieldModal extends Component {
       modalOpen: false,
       typeArray: this.props.types,
       currentSearch: '',
-      foundType: false
+      foundType: false,
+      displayLabel: this.props.appState.displayLabel
     }
   }
 
   componentWillReceiveProps(nextProps){
+    console.log('NEXT PROPS', nextProps)
     if(this.props.types !== nextProps.types){
       this.setState({typeArray: nextProps.types});
+    }
+
+    if(this.props.appState.displayLabel !== nextProps.appState.displayLabel){
+      this.setState({displayLabel: nextProps.appState.displayLabel});
     }
   }
 
@@ -59,6 +65,14 @@ class AddFieldModal extends Component {
         }
       }
     });
+  }
+
+  setDisplayLabel = (e) => {
+    this.setState({displayLabel: e.target.value});
+  }
+
+  handleDisplayLabel = (e) => {
+    console.log('LABEL BLUR', e.target.value);
   }
 
   render() {
@@ -105,7 +119,12 @@ class AddFieldModal extends Component {
                   <div className="row">
                     <div className="col-md-3">
                       <h5>Display Label</h5>
-                      <Input placeholder='Label your input' onBlur={this.handleDisplayLabelBlur} />
+                      <Input
+                        placeholder='Label your input'
+                        onChange={this.setDisplayLabel}
+                        onBlur={this.handleDisplayLabel}
+                        value={this.state.displayLabel}
+                      />
                       <h6>For display purposes, spaces allowed.</h6>
                     </div>
 
