@@ -102,12 +102,34 @@ class AddFieldModal extends Component {
   }
 
   handleDefaultValue = (e) => {
-    let defaultStrTrimmed = e.target.value.trim();
-    if(defaultStrTrimmed.toLowerCase() === 'none'){
-      defaultStrTrimmed = '';
+    if(!this.props.appState.selectInput){
+      let defaultStrTrimmed = e.target.value.trim();
+      if(defaultStrTrimmed.toLowerCase() === 'none'){
+        defaultStrTrimmed = '';
+      }
+      console.log('NOT SELECT DEFAULT BLUR', defaultStrTrimmed);
+      this.setState({defaultValue: defaultStrTrimmed});
     }
-    console.log('DEFAULT BLUR', defaultStrTrimmed);
-    this.setState({defaultValue: defaultStrTrimmed});
+
+    if(this.props.appState.selectInput){
+      let optionsArr = [];
+      let userInputOptions = e.target.value;
+
+      let currentOption = '';
+      for(let i = 0; i < userInputOptions.length; i++){
+        currentOption += userInputOptions[i];
+        if(userInputOptions[i] === ','){
+          currentOption = currentOption.substring(0, currentOption.length - 1);
+          optionsArr.push(currentOption.trim());
+          currentOption = '';
+        }
+        if(i === userInputOptions.length - 1){
+          optionsArr.push(currentOption.trim());
+        }
+      }
+      console.log('SELECT DEFAULT BLUR', optionsArr);
+      this.props.handleSelectDefaultValue(optionsArr);
+    }
   }
 
   setCustomValidation = (e) => {
@@ -118,8 +140,7 @@ class AddFieldModal extends Component {
     let regexPattern = e.target.value;
 
     // if regex pattern === ISO format date
-    console.log('TOGGLE DATE BUTTON');
-    this.props.toggleDateInput(e, data);
+    console.log('VALIDATING DATE REGEX');
 
     console.log('CUSTOM BLUR', e.target.value);
   }
@@ -127,6 +148,14 @@ class AddFieldModal extends Component {
   render() {
     console.log('MODAL PROPS', this.props);
     console.log('MODAL STATE', this.state);
+
+    let defaultValueDescription;
+
+    defaultValueDescription = (<h6>Initial value for input. Leave blank or use "None" for no default value.</h6>)
+
+    if(this.props.appState.selectInput){
+      defaultValueDescription = (<h6>Initial options to choose from separated by commas.</h6>)
+    }
 
     return (
       <div className="AddFieldModal modal-body">
@@ -202,7 +231,7 @@ class AddFieldModal extends Component {
                         onBlur={this.handleDefaultValue}
                         value={this.state.defaultValue}
                       />
-                      <h6>Initial value for input. Use "None" for no default value.</h6>
+                      {defaultValueDescription}
                     </div>
                   </div>
 
