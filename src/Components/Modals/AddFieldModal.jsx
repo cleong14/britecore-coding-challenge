@@ -24,6 +24,9 @@ class AddFieldModal extends Component {
     if(this.props.types !== nextProps.types){
       this.setState({typeArray: nextProps.types});
     }
+    if(this.props.appState.customValidation !== nextProps.appState.customValidation){
+      this.setState({customValidation: nextProps.appState.customValidation});
+    }
   }
 
   handleOpen = () => {
@@ -111,7 +114,13 @@ class AddFieldModal extends Component {
     this.setState({customValidation: e.target.value});
   }
 
-  handleCustomValidation = (e) => {
+  handleCustomValidation = (e, data) => {
+    let regexPattern = e.target.value;
+
+    // if regex pattern === ISO format date
+    console.log('TOGGLE DATE BUTTON');
+    this.props.toggleDateInput(e, data);
+
     console.log('CUSTOM BLUR', e.target.value);
   }
 

@@ -61,6 +61,7 @@ class App extends Component {
       ],
       buttonActive: false,
       textInput: false,
+      dateInput: false,
       displayLabel: '',
       referenceName: '',
       defaultValue: '',
@@ -130,7 +131,9 @@ class App extends Component {
           this.setState({
             types: resetActiveTypesArray,
             buttonActive: false,
-            textInput: false
+            textInput: false,
+            dateInput: false,
+            customValidation: ''
           });
         }
       }
@@ -190,133 +193,147 @@ class App extends Component {
       this.setState({
         types: activateButtonArray,
         buttonActive: true,
-        textInput: true
+        textInput: true,
+        dateInput: false,
+        customValidation: ''
       });
     }
   }
 
   handleDateClick = (e, data) => {
+    console.log('EVENT', e.target.value);
     console.log('ON CLICK DATE DATA', data);
+    console.log('DATE TOGGLE HIT');
 
     if(this.state.buttonActive){ // if any button is active
       for(let i = 0; i < this.state.types.length; i++){
 
         if(this.state.types[i].buttonClassName.includes(' active')){ // finding which specific button is active
           console.log('DATE IS THE ACTIVE ITEM', this.state.types[i]);
-          let resetActiveTypesArray = [
-            {
-              buttonClassName: 'textButton',
-              buttonOnClick: this.handleTextClick,
-              className: 'text',
-              label: 'Text',
-              definition: 'String of text',
-              defaultDisplay: 'Free-form text input'
-            },
-            {
-              buttonClassName: 'dateButton',
-              buttonOnClick: this.handleDateClick,
-              className: 'date',
-              label: 'Date',
-              definition: 'Standard ISO format date',
-              defaultDisplay: 'Datepicker, with configurable format'
-            },
-            {
-              buttonClassName: 'vinButton',
-              buttonOnClick: this.handleVinClick,
-              className: 'vin',
-              label: 'VIN',
-              definition: 'Vehicle Identification Number',
-              defaultDisplay: 'Free-form text input'
-            },
-            {
-              buttonClassName: 'numberButton',
-              buttonOnClick: this.handleNumberClick,
-              className: 'number',
-              label: 'Number',
-              definition: 'Integar',
-              defaultDisplay: 'Free-form integar input'
-            },
-            {
-              buttonClassName: 'currencyButton',
-              buttonOnClick: this.handleCurrencyClick,
-              className: 'currency',
-              label: 'Currency',
-              definition: 'Form of currency',
-              defaultDisplay: 'Free-form currency input'
-            },
-            {
-              buttonClassName: 'selectButton',
-              buttonOnClick: this.handleSelectClick,
-              className: 'select',
-              label: 'Select (Multiple preset options with a single choice)',
-              definition: 'Select single option from preset list',
-              defaultDisplay: 'Single choice from multiple preset options'
-            }
-          ];
+          if(e.target.value !== '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$'){
+            let resetActiveTypesArray = [
+              {
+                buttonClassName: 'textButton',
+                buttonOnClick: this.handleTextClick,
+                className: 'text',
+                label: 'Text',
+                definition: 'String of text',
+                defaultDisplay: 'Free-form text input'
+              },
+              {
+                buttonClassName: 'dateButton',
+                buttonOnClick: this.handleDateClick,
+                className: 'date',
+                label: 'Date',
+                definition: 'Standard ISO format date',
+                defaultDisplay: 'Datepicker, with configurable format'
+              },
+              {
+                buttonClassName: 'vinButton',
+                buttonOnClick: this.handleVinClick,
+                className: 'vin',
+                label: 'VIN',
+                definition: 'Vehicle Identification Number',
+                defaultDisplay: 'Free-form text input'
+              },
+              {
+                buttonClassName: 'numberButton',
+                buttonOnClick: this.handleNumberClick,
+                className: 'number',
+                label: 'Number',
+                definition: 'Integar',
+                defaultDisplay: 'Free-form integar input'
+              },
+              {
+                buttonClassName: 'currencyButton',
+                buttonOnClick: this.handleCurrencyClick,
+                className: 'currency',
+                label: 'Currency',
+                definition: 'Form of currency',
+                defaultDisplay: 'Free-form currency input'
+              },
+              {
+                buttonClassName: 'selectButton',
+                buttonOnClick: this.handleSelectClick,
+                className: 'select',
+                label: 'Select (Multiple preset options with a single choice)',
+                definition: 'Select single option from preset list',
+                defaultDisplay: 'Single choice from multiple preset options'
+              }
+            ];
 
-          this.setState({
-            types: resetActiveTypesArray,
-            buttonActive: false
-          });
+            this.setState({
+              types: resetActiveTypesArray,
+              buttonActive: false,
+              textInput: false,
+              dateInput: false,
+              customValidation: ''
+            });
+          }
         }
       }
     }
     if(!this.state.buttonActive){
-      let activateButtonArray = [
-        {
-          buttonClassName: 'textButton',
-          buttonOnClick: this.handleTextClick,
-          className: 'text',
-          label: 'Text',
-          definition: 'String of text',
-          defaultDisplay: 'Free-form text input'
-        },
-        {
-          buttonClassName: 'dateButton' + ' active',
-          buttonOnClick: this.handleDateClick,
-          className: 'date',
-          label: 'Date',
-          definition: 'Standard ISO format date',
-          defaultDisplay: 'Datepicker, with configurable format'
-        },
-        {
-          buttonClassName: 'vinButton',
-          buttonOnClick: this.handleVinClick,
-          className: 'vin',
-          label: 'VIN',
-          definition: 'Vehicle Identification Number',
-          defaultDisplay: 'Free-form text input'
-        },
-        {
-          buttonClassName: 'numberButton',
-          buttonOnClick: this.handleNumberClick,
-          className: 'number',
-          label: 'Number',
-          definition: 'Integar',
-          defaultDisplay: 'Free-form integar input'
-        },
-        {
-          buttonClassName: 'currencyButton',
-          buttonOnClick: this.handleCurrencyClick,
-          className: 'currency',
-          label: 'Currency',
-          definition: 'Form of currency',
-          defaultDisplay: 'Free-form currency input'
-        },
-        {
-          buttonClassName: 'selectButton',
-          buttonOnClick: this.handleSelectClick,
-          className: 'select',
-          label: 'Select (Multiple preset options with a single choice)',
-          definition: 'Select single option from preset list',
-          defaultDisplay: 'Single choice from multiple preset options'
-        }
-      ];
+      if(e && e.target.value === '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$' || data && data.className.includes('dateButton')){
+        let activateButtonArray = [
+          {
+            buttonClassName: 'textButton',
+            buttonOnClick: this.handleTextClick,
+            className: 'text',
+            label: 'Text',
+            definition: 'String of text',
+            defaultDisplay: 'Free-form text input'
+          },
+          {
+            buttonClassName: 'dateButton' + ' active',
+            buttonOnClick: this.handleDateClick,
+            className: 'date',
+            label: 'Date',
+            definition: 'Standard ISO format date',
+            defaultDisplay: 'Datepicker, with configurable format'
+          },
+          {
+            buttonClassName: 'vinButton',
+            buttonOnClick: this.handleVinClick,
+            className: 'vin',
+            label: 'VIN',
+            definition: 'Vehicle Identification Number',
+            defaultDisplay: 'Free-form text input'
+          },
+          {
+            buttonClassName: 'numberButton',
+            buttonOnClick: this.handleNumberClick,
+            className: 'number',
+            label: 'Number',
+            definition: 'Integar',
+            defaultDisplay: 'Free-form integar input'
+          },
+          {
+            buttonClassName: 'currencyButton',
+            buttonOnClick: this.handleCurrencyClick,
+            className: 'currency',
+            label: 'Currency',
+            definition: 'Form of currency',
+            defaultDisplay: 'Free-form currency input'
+          },
+          {
+            buttonClassName: 'selectButton',
+            buttonOnClick: this.handleSelectClick,
+            className: 'select',
+            label: 'Select (Multiple preset options with a single choice)',
+            definition: 'Select single option from preset list',
+            defaultDisplay: 'Single choice from multiple preset options'
+          }
+        ];
 
-      this.setState({
-        types: activateButtonArray,
-        buttonActive: true
-      });
+        this.setState({
+          types: activateButtonArray,
+          buttonActive: true,
+          textInput: false,
+          dateInput: true,
+          customValidation: '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(.[0-9]+)?(Z)?$'
+        });
+      }
     }
   }
 
@@ -828,7 +845,7 @@ class App extends Component {
         <CommercialContainer>
           <h1 className="commercialHeader">Commercial Property</h1>
 
-          <AddFieldModal types={this.state.types} appState={this.state} />
+          <AddFieldModal types={this.state.types} appState={this.state} toggleDateInput={this.handleDateClick} />
 
           {/* <h3>Preview Fields Below</h3>
           <FieldsContainer>
