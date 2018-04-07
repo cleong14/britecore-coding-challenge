@@ -75,7 +75,19 @@ class AddFieldModal extends Component {
   }
 
   setReferenceName = (e) => {
-    this.setState({referenceName: e.target.value});
+    let oldReferenceName = e.target.value;
+    let newReferenceArr = [];
+
+    for(let i = 0; i < oldReferenceName.length; i++){
+      let currentLetter = oldReferenceName[i];
+      if(currentLetter === ' '){
+        currentLetter = currentLetter.replace(' ', '-');
+      }
+      newReferenceArr.push(currentLetter);
+    }
+
+    let noSpaceRefName = newReferenceArr.join('');
+    this.setState({referenceName: noSpaceRefName});
   }
 
   handleReferenceName = (e) => {

@@ -60,6 +60,7 @@ class App extends Component {
         }
       ],
       buttonActive: false,
+      textInput: false,
       displayLabel: '',
       referenceName: '',
       defaultValue: '',
@@ -128,7 +129,8 @@ class App extends Component {
 
           this.setState({
             types: resetActiveTypesArray,
-            buttonActive: false
+            buttonActive: false,
+            textInput: false
           });
         }
       }
@@ -187,7 +189,8 @@ class App extends Component {
 
       this.setState({
         types: activateButtonArray,
-        buttonActive: true
+        buttonActive: true,
+        textInput: true
       });
     }
   }
