@@ -99,7 +99,12 @@ class AddFieldModal extends Component {
   }
 
   handleDefaultValue = (e) => {
-    console.log('DEFAULT BLUR', e.target.value);
+    let defaultStrTrimmed = e.target.value.trim();
+    if(defaultStrTrimmed.toLowerCase() === 'none'){
+      defaultStrTrimmed = '';
+    }
+    console.log('DEFAULT BLUR', defaultStrTrimmed);
+    this.setState({defaultValue: defaultStrTrimmed});
   }
 
   setCustomValidation = (e) => {
