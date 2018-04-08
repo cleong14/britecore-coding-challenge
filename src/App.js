@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Form } from 'semantic-ui-react';
 import CommercialContainer from './Components/CommercialContainer';
 import FieldsContainer from './Components/FieldsContainer';
 import AddFieldModal from './Components/Modals/AddFieldModal';
@@ -69,7 +70,8 @@ class App extends Component {
       displayLabel: '',
       referenceName: '',
       defaultValue: '',
-      customValidation: ''
+      customValidation: '',
+      renderFieldsArray: []
     }
   }
 
@@ -911,8 +913,25 @@ class App extends Component {
     }
   }
 
-  handleSelectDefaultValue = (optionsArr) => {
+  handleDisplayLabel = (displayLabel) => {
+    this.setState({displayLabel: displayLabel});
+  }
+
+  handleReferenceName = (referenceName) => {
+    this.setState({referenceName: referenceName});
+  }
+
+  handleDefaultValue = (optionsArr) => {
     this.setState({defaultValue: optionsArr});
+  }
+
+  handleCustomValidation = (regexPattern) => {
+    this.setState({customValidation: regexPattern});
+  }
+
+  handleModalSave = (modalState) => {
+    console.log('MODAL STATE AFTER SAVE', modalState);
+    console.log('APP STATE AFTER SAVE', this.state);
   }
 
   render() {
@@ -923,14 +942,19 @@ class App extends Component {
         <CommercialContainer>
           <h1 className="commercialHeader">Commercial Property</h1>
 
-          <AddFieldModal types={this.state.types} appState={this.state} handleSelectDefaultValue={this.handleSelectDefaultValue} />
+          <AddFieldModal
+            types={this.state.types}
+            appState={this.state}
+            handleDisplayLabel={this.handleDisplayLabel}
+            handleReferenceName={this.handleReferenceName}
+            handleDefaultValue={this.handleDefaultValue}
+            handleCustomValidation={this.handleCustomValidation}
+            handleModalSave={this.handleModalSave}
+          />
 
-          {/* <h3>Preview Fields Below</h3>
-          <FieldsContainer>
-            <div className="row">
+          <h3>Preview Fields Below</h3>
 
-            </div>
-          </FieldsContainer> */}
+          <FieldsContainer appState={this.state} handleModalSave={this.handleModalSave} />
 
         </CommercialContainer>
       </div>

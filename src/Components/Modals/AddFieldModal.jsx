@@ -15,7 +15,8 @@ class AddFieldModal extends Component {
       displayLabel: this.props.appState.displayLabel,
       referenceName: this.props.appState.referenceName,
       defaultValue: this.props.appState.defaultValue,
-      customValidation: this.props.appState.customValidation
+      customValidation: this.props.appState.customValidation,
+      renderFieldsArray: this.props.appState.renderFieldsArray
     }
   }
 
@@ -37,9 +38,17 @@ class AddFieldModal extends Component {
     this.setState({modalOpen: false});
   }
 
-  // handleSave = () => {
-  //
-  // }
+  handleSave = () => {
+    this.state.renderFieldsArray.push({
+      displayLabel: this.state.displayLabel,
+      referenceName: this.state.referenceName,
+      defaultValue: this.state.defaultValue,
+      customValidation: this.state.customValidation
+    });
+
+    // console.log('MODAL STATE AFTER SAVE', this.state);
+    this.props.handleModalSave(this.state);
+  }
 
   handleSearch = (e) => {
     this.setState({currentSearch: e.target.value});
@@ -75,6 +84,7 @@ class AddFieldModal extends Component {
 
   handleDisplayLabel = (e) => {
     console.log('LABEL BLUR', e.target.value);
+    this.props.handleDisplayLabel(this.state.displayLabel);
   }
 
   setReferenceName = (e) => {
@@ -95,6 +105,7 @@ class AddFieldModal extends Component {
 
   handleReferenceName = (e) => {
     console.log('REFERENCE BLUR', e.target.value);
+    this.props.handleReferenceName(this.state.referenceName);
   }
 
   setDefaultValue = (e) => {
@@ -109,6 +120,7 @@ class AddFieldModal extends Component {
       }
       console.log('NOT SELECT DEFAULT BLUR', defaultStrTrimmed);
       this.setState({defaultValue: defaultStrTrimmed});
+      this.props.handleDefaultValue(defaultStrTrimmed);
     }
 
     if(this.props.appState.selectInput){
@@ -128,7 +140,7 @@ class AddFieldModal extends Component {
         }
       }
       console.log('SELECT DEFAULT BLUR', optionsArr);
-      this.props.handleSelectDefaultValue(optionsArr);
+      this.props.handleDefaultValue(optionsArr);
     }
   }
 
@@ -142,7 +154,8 @@ class AddFieldModal extends Component {
     // if regex pattern === ISO format date
     console.log('VALIDATING DATE REGEX');
 
-    console.log('CUSTOM BLUR', e.target.value);
+    console.log('CUSTOM BLUR', regexPattern);
+    this.props.handleCustomValidation(regexPattern);
   }
 
   render() {
@@ -271,7 +284,15 @@ class AddFieldModal extends Component {
               </div>
             </Modal.Content>
             <Modal.Actions>
-              <Button onClick={this.handleClose}>
+              <Button floated='left' color='green' onClick={this.handleSave}>
+                Save Changes
+              </Button>
+
+              <Button floated='right' color='red' onClick={this.handleClose}>
+                Delete Input
+              </Button>
+
+              <Button floated='right' onClick={this.handleClose}>
                 Close
               </Button>
             </Modal.Actions>
