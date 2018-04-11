@@ -180,13 +180,13 @@ class AddFieldModal extends Component {
             size='fullscreen'
           >
             <Modal.Header>Commercial Property - Add Field</Modal.Header>
-            <Modal.Content scrolling>
+            <Modal.Content scrolling className='modalContent'>
               <div className="row">
                 <div className="col-md-3">
                   <h3>Field Types</h3>
 
-                  <h5>Filter Types</h5>
-                  <Input placeholder='Search types' onKeyUp={this.handleSearch} />
+                  <h5 className='filterTypes-header'>Filter Types</h5>
+                  <Input className='searchInput' placeholder='Search types' onKeyUp={this.handleSearch} />
 
                   {this.state.typeArray.map((type, i) => {
                     return (
@@ -211,6 +211,7 @@ class AddFieldModal extends Component {
                     <div className="col-md-3">
                       <h5>Display Label</h5>
                       <Input
+                        className='displayLabel-input'
                         placeholder='Label your input'
                         onChange={this.setDisplayLabel}
                         onBlur={this.handleDisplayLabel}
@@ -222,6 +223,7 @@ class AddFieldModal extends Component {
                     <div className="col-md-3">
                       <h5>Reference Name</h5>
                       <Input
+                        className='referenceName-label'
                         placeholder='E.g. display-label'
                         onChange={this.setReferenceName}
                         onBlur={this.handleReferenceName}
@@ -239,6 +241,7 @@ class AddFieldModal extends Component {
                     <div className="col-md-3">
                       <h5>Default Value</h5>
                       <Input
+                        className='defaultValue-input'
                         placeholder='Default value for input'
                         onChange={this.setDefaultValue}
                         onBlur={this.handleDefaultValue}
@@ -252,6 +255,7 @@ class AddFieldModal extends Component {
                     <div className="col-md-3">
                       <h5>Custom Validation</h5>
                       <Input
+                        className='customValidation-input'
                         placeholder='Set custom validations'
                         onChange={this.setCustomValidation}
                         onBlur={this.handleCustomValidation}

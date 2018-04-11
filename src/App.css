@@ -2,8 +2,32 @@
   margin: 25px;
 }
 
+.button {
+  text-align: left !important;
+}
+
 .container-fluid {
   padding-left: 0;
+}
+
+.currencyButton {
+  width: 100%;
+}
+
+.customValidation-input {
+  width: 100%;
+}
+
+.dateButton {
+  width: 100%;
+}
+
+.defaultValue-input {
+  width: 100%;
+}
+
+.displayLabel-input {
+  width: 100%;
 }
 
 .fieldDetails {
@@ -14,22 +38,51 @@
   padding-left: 0;
 }
 
+.filterTypes-header {
+  margin-top: 14px;
+}
+
 .modal-body {
   padding-left: 0;
+}
+
+.container-fluid {
+  width: 100%;
 }
 
 .modal-header {
   padding-left: 15px;
 }
 
-.type {
-  text-align: left;
+.numberButton {
+  width: 100%;
 }
 
-.type .button {
-  background: blue;
+.referenceName-label {
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.textButton {
+  width: 100%;
+}
+
+.types {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .type .text {
   /* background-color: blue; */
+}
+
+.vinButton {
+  width: 100%;
+}
+
+.fieldButtons {
+  /* background: red !important; */
 }

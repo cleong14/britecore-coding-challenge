@@ -932,6 +932,8 @@ class App extends Component {
   handleModalSave = (modalState) => {
     console.log('MODAL STATE AFTER SAVE', modalState);
     console.log('APP STATE AFTER SAVE', this.state);
+    this.setState({renderFieldsArray: modalState.renderFieldsArray});
+    console.log('RENDER ARRAY REWRITTEN BY MODAL STATE');
   }
 
   render() {

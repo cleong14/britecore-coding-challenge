@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 class FieldsContainer extends Component {
   constructor(props) {
@@ -9,7 +9,8 @@ class FieldsContainer extends Component {
       displayLabel: this.props.appState.displayLabel,
       referenceName: this.props.appState.referenceName,
       defaultValue: this.props.appState.defaultValue,
-      customValidation: this.props.appState.customValidation
+      customValidation: this.props.appState.customValidation,
+      renderFieldsArray: this.props.appState.renderFieldsArray
     }
   }
 
@@ -18,18 +19,42 @@ class FieldsContainer extends Component {
     // if(this.state.renderFieldsArray !== nextProps.appState.renderFieldsArray){
     //   console.log('DIFFERENT PROPS');
     // }
+    // this.setState({
+    //   displayLabel: nextProps.appState.displayLabel,
+    //   referenceName: nextProps.appState.referenceName,
+    //   defaultValue: nextProps.appState.defaultValue,
+    //   customValidation: nextProps.appState.customValidation,
+    //   renderFieldsArray: nextProps.appState.renderFieldsArray
+    // });
+    // console.log('STATE AFTER NEXTPROPS SET', this.state.defaultValue);
   }
 
   render() {
     console.log('FIELDS CONTAINER PROPS', this.props);
+    console.log('FIELDS CONTAINER PROPS ARRAY', this.props.appState.renderFieldsArray);
+    console.log('FIELDS CONTAINER STATE ARRAY', this.state.renderFieldsArray);
     console.log('FIELDS CONTAINER STATE', this.state);
+
+    const fieldDisplayLabel = this.state.renderFieldsArray.map((field, i) => {
+      console.log('LABEL INSIDE RENDER', field);
+      return (
+        <div key={i} className='col-md-3 fields'>
+          <Button className='fieldButtons'>
+            <Form.Field>
+              <h5>{field.displayLabel}</h5><br/>
+              <input defaultValue={field.defaultValue} />
+            </Form.Field>
+          </Button>
+        </div>
+      );
+    });
+
     return (
       <div className="FieldsContainer">
         <Form>
-          <Form.Field>
-            <label>{this.props.appState.displayLabel}</label>
-            <input value={this.props.appState.defaultValue} />
-          </Form.Field>
+          <div className='row'>
+            {fieldDisplayLabel}
+          </div>
         </Form>
       </div>
     );
